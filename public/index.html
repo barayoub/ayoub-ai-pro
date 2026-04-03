@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Ayoub AI Pro - Intelligent Assistant powered by Google Gemini. Chat, analyze images, upload files, and more."
+    />
+    <meta name="keywords" content="AI, Assistant, Gemini, Chatbot, Ayoub AI" />
+    <meta name="author" content="Ayoub" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Ayoub AI" />
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    
+    <!-- Icons for different platforms -->
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/favicon-16x16.png" />
+    
+    <!-- Open Graph tags for social sharing -->
+    <meta property="og:title" content="Ayoub AI Pro" />
+    <meta property="og:description" content="Intelligent AI Assistant powered by Google Gemini" />
+    <meta property="og:type" content="website" />
+    
+    <title>Ayoub AI Pro - Intelligent Assistant</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    
+    <!-- Service Worker for PWA -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then(registration => {
+              console.log('Service Worker registered successfully:', registration);
+            })
+            .catch(error => {
+              console.log('Service Worker registration failed:', error);
+            });
+        });
+      }
+    </script>
+    
+    <!-- Before Install Prompt for PWA -->
+    <script>
+      let deferredPrompt;
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        // يمكنك إظهار زر التثبيت هنا
+        window.dispatchEvent(new CustomEvent('pwa-ready'));
+      });
+    </script>
+  </body>
+</html>
+
